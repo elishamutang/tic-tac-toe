@@ -23,9 +23,12 @@ function GameBoard () {
 
 
 // Players object (or module)
-function Players(playerOne, playerTwo) {
+function Players() {
 
-    return {playerOne, playerTwo};
+    const playerScore = 0;
+    let player = prompt("Please enter your name");
+
+    return {playerScore, player};
 
 };
 
@@ -34,8 +37,15 @@ function Players(playerOne, playerTwo) {
 const startGame = (function () {
 
     const getBoard = GameBoard();
-    const getName = Players()
+    const getPlayers = [Players(), Players()];
+
+    for(let i=0; i < getPlayers.length; i++) {
+        console.log(`Player ${i+1}: ${getPlayers[i].player}`);
+    }
 
     console.log(getBoard.printBoard());
+
+
+
 
 })();
