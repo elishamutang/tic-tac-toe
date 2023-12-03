@@ -25,11 +25,9 @@ function GameBoard () {
 // Players object (or module)
 function Players() {
 
-    const playerScore = 0;
     let player = prompt("Please enter your name");
 
     return {
-        playerScore, 
         player
     };
 
@@ -37,7 +35,7 @@ function Players() {
 
 
 // Gameflow of Tic Tac Toe
-function startGame() {
+function StartGame() {
 
     const getBoard = GameBoard();
     const getPlayers = [Players(), Players()];
@@ -129,4 +127,4 @@ function startGame() {
     };
 }
 
-const game = startGame();
+const game = StartGame();
