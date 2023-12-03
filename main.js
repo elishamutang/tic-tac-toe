@@ -123,7 +123,6 @@ function StartGame() {
         getActivePlayer,
         playRound
     };
-
 }
 
 const game = StartGame();
