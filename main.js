@@ -4,6 +4,7 @@ function GameBoard () {
     let cols = 3;
     let board = [];
 
+    // 2d array for gameboard
     for(let i=0; i < rows; i++) {
         board[i] = [];
         for(let j=0; j < cols; j++) {
@@ -65,7 +66,6 @@ function startGame() {
 
     
     // Switch player
-
     const switchPlayer = function() {
         
         if(activePlayer == getPlayers[0]) {
