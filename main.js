@@ -47,24 +47,63 @@ function startGame() {
 
     console.log(getBoard.printBoard());
 
-    // Determine active player
+    // Initialize first player
+    let activePlayer = getPlayers[0];
+    activePlayer.value = "X";
 
+
+    // Show current player
     const getActivePlayer = function() {
-
-        let activePlayer = getPlayers[0];
 
         console.log(`Active player: ${activePlayer.player}`);
 
+        return {
+            activePlayer
+        };
+
     }
 
+    
+    // Switch player
 
-    // Stars round
+    const switchPlayer = function() {
+        
+        if(activePlayer == getPlayers[0]) {
+
+            activePlayer = getPlayers[1];
+            activePlayer.value = "O";
+
+        } else {
+
+            activePlayer = getPlayers[0];
+
+        }
+
+        console.log(`${activePlayer.player}'s turn`);
+
+        return {
+            activePlayer
+        };
+
+    }
+
+    // Determine winner
+    
+
+
+
+
+
+
+
+    // Starts round
     const playRound = function() {
 
         // Prompt user to enter row and col
         let playerRow = prompt("Enter row number (0-3)");
         let playerCol = prompt("Enter col number (0-3)");
-        let gameValue = "X";
+
+        let currentPlayer = getActivePlayer().activePlayer;
 
         for(i of getBoard.printBoard()) {
 
@@ -72,13 +111,14 @@ function startGame() {
 
             for(j of row) {
 
-                row[playerCol] = gameValue;
+                row[playerCol] = currentPlayer.value;
 
             }
         }
 
-        console.log(getBoard.printBoard());
+        switchPlayer();
 
+        console.log(getBoard.printBoard());
     }
 
     
