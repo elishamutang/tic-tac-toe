@@ -25,10 +25,12 @@ function GameBoard () {
 // Players object (or module)
 function Players() {
 
-    let player = prompt("Please enter your name");
+    const player = prompt("Please enter your name");
+    let playerScore = 0;
 
     return {
-        player
+        player,
+        playerScore
     };
 
 };
@@ -39,6 +41,8 @@ function StartGame() {
 
     const getBoard = GameBoard().printBoard();
     const getPlayers = [Players(), Players()];
+
+    const trackScore = [];
 
     for(let i=0; i < getPlayers.length; i++) {
         console.log(`Player ${i+1}: ${getPlayers[i].player}`);
@@ -86,14 +90,29 @@ function StartGame() {
     }
 
     // Determine winner
-    const getWinner = function() {
+    const checkScore = function() {
 
-        for(i of getBoard) {
+        for(let i=0; i<getBoard.length; i++) {
+            // Loop through each row
+            for(let j=0; j<getBoard[i].length; j++) {
 
+                // Loop through each index in each row of getBoard
+                if(getBoard[i][j] == "X" && activePlayer == getPlayers[0]) {
+
+                    console.log(`Row: ${i}, Col: ${j}`);                 
+
+                } else if(getBoard[i][j] == "O" && activePlayer == getPlayers[1]) {
+                    console.log(`Row: ${i}, Col: ${j}`);
+                }
+
+            }
         }
 
-    }
+        // console.log(getPlayers[0].player, getPlayers[0].playerScore);
+        // console.log(getPlayers[1].player, getPlayers[1].playerScore);
+        console.log(trackScore);
 
+    }
 
 
     // Starts round
@@ -113,6 +132,7 @@ function StartGame() {
         // Marks gameboard with player value
         getBoard[playerRow][playerCol] = currentPlayer.value;
 
+        checkScore();
         switchPlayer();
 
         console.log(getBoard);
