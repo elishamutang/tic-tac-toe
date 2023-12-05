@@ -8,5 +8,9 @@ This branch was created to test out an alternative way of approaching this proje
 
 Objectives:
 
-1. Create working game in console (almost there)
+1. Create working game in console (technically almost done)
 2. Create function to render the game on the webpage
+
+To keep in mind:
+
+1. Come up with efficient solution for checkForWinner logic
