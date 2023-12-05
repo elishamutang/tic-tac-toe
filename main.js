@@ -1,8 +1,8 @@
 // Print gameboard
 function GameBoard () {
-    let rows = 3;
-    let cols = 3;
-    let board = [];
+    const rows = 3;
+    const cols = 3;
+    const board = [];
 
     // 2d array for gameboard
     for(let i=0; i < rows; i++) {
@@ -14,7 +14,6 @@ function GameBoard () {
 
     const printBoard = () => board;
 
-    // console.log(printBoard());
     return {
         printBoard
     };
@@ -26,11 +25,11 @@ function GameBoard () {
 function Players() {
 
     const player = prompt("Please enter your name");
-    let playerScore = 0;
+    const trackPlayerScore = [];
 
     return {
         player,
-        playerScore
+        trackPlayerScore
     };
 
 };
@@ -39,16 +38,15 @@ function Players() {
 // Gameflow of Tic Tac Toe
 function StartGame() {
 
-    const getBoard = GameBoard().printBoard();
+    let getBoard = GameBoard().printBoard();
     const getPlayers = [Players(), Players()];
-
-    const trackScore = [];
 
     for(let i=0; i < getPlayers.length; i++) {
         console.log(`Player ${i+1}: ${getPlayers[i].player}`);
     }
 
     console.log(getBoard);
+
 
     // Initialize first player
     let activePlayer = getPlayers[0];
@@ -89,7 +87,50 @@ function StartGame() {
 
     }
 
+
     // Determine winner
+    const checkForWinner = function() {
+
+        const playerScore = activePlayer.trackPlayerScore;
+        console.log(`${playerScore}, ${activePlayer.player}`);
+
+        // Horizontal Win
+        if(playerScore.includes("00") && playerScore.includes("01") && playerScore.includes("02")) {
+            return true;
+
+        } else if(playerScore.includes("10") && playerScore.includes("11") && playerScore.includes("12")) {
+            return true;
+
+        } else if(playerScore.includes("20") && playerScore.includes("21") && playerScore.includes("22")) {
+            return true;
+
+        }
+
+        // Diagonal win
+        if(playerScore.includes("00") && playerScore.includes("11") && playerScore.includes("22")) {
+            return true;
+
+        } else if(playerScore.includes("02") && playerScore.includes("11") && playerScore.includes("20")) {
+            return true;
+
+        }
+
+        // Vertical win
+        if(playerScore.includes("00") && playerScore.includes("10") && playerScore.includes("20")) {
+            return true;
+
+        } else if(playerScore.includes("01") && playerScore.includes("11") && playerScore.includes("21")) {
+            return true;
+
+        } else if(playerScore.includes("02") && playerScore.includes("12") && playerScore.includes("22")) {
+            return true;
+
+        }
+
+    }
+
+
+    // Keeps track of player input
     const checkScore = function() {
 
         for(let i=0; i<getBoard.length; i++) {
@@ -97,21 +138,22 @@ function StartGame() {
             for(let j=0; j<getBoard[i].length; j++) {
 
                 // Loop through each index in each row of getBoard
-                if(getBoard[i][j] == "X" && activePlayer == getPlayers[0]) {
+                if(getBoard[i][j] === "X" && activePlayer === getPlayers[0]) {
 
-                    console.log(`Row: ${i}, Col: ${j}`);                 
+                    // Checks if position of "X" is not recorded in trackPlayerScore array
+                    if(!activePlayer.trackPlayerScore.includes(`${i}${j}`)) {
+                        activePlayer.trackPlayerScore.push(`${i}${j}`); 
+                    }                
 
-                } else if(getBoard[i][j] == "O" && activePlayer == getPlayers[1]) {
-                    console.log(`Row: ${i}, Col: ${j}`);
+                } else if(getBoard[i][j] === "O" && activePlayer === getPlayers[1]) {
+                    
+                    // Checks if position of "X" is not recorded in trackPlayerScore array
+                    if(!activePlayer.trackPlayerScore.includes(`${i}${j}`)) {
+                        activePlayer.trackPlayerScore.push(`${i}${j}`); 
+                    }    
                 }
-
             }
         }
-
-        // console.log(getPlayers[0].player, getPlayers[0].playerScore);
-        // console.log(getPlayers[1].player, getPlayers[1].playerScore);
-        console.log(trackScore);
-
     }
 
 
@@ -119,8 +161,8 @@ function StartGame() {
     const playRound = function() {
 
         // Prompt user to enter row and col
-        let playerRow = prompt("Enter row number (0-3)");
-        let playerCol = prompt("Enter col number (0-3)");
+        let playerRow = prompt("Enter row number (0-2)");
+        let playerCol = prompt("Enter col number (0-2)");
 
         let currentPlayer = getActivePlayer().activePlayer;
 
@@ -132,8 +174,19 @@ function StartGame() {
         // Marks gameboard with player value
         getBoard[playerRow][playerCol] = currentPlayer.value;
 
+
+        // Track score
         checkScore();
-        switchPlayer();
+
+        // Check for winner
+        if(checkForWinner() === true) {
+            console.log(`${currentPlayer.player} is the winner!`);
+
+            // insert reset method
+
+        } else {
+            switchPlayer();
+        }
 
         console.log(getBoard);
     }
@@ -141,7 +194,8 @@ function StartGame() {
 
     return {
         getActivePlayer,
-        playRound
+        playRound,
+        getBoard
     };
 }
 
