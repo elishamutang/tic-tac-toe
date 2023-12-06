@@ -10,7 +10,8 @@ Objectives:
 
 1. Create working game in console (technically almost done)
 2. Set up reset method to reset round when a winner is found. (done)
-3. Create function to render the game on the webpage (next)
+3. Check for ties (next)
+4. Create function to render the game on the webpage
 
 To keep in mind:
 
