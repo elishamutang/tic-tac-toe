@@ -136,8 +136,8 @@ function StartGame() {
         for(let i=0; i<getBoard.length; i++) {
             // Loop through each row
             for(let j=0; j<getBoard[i].length; j++) {
-
                 // Loop through each index in each row of getBoard
+                
                 if(getBoard[i][j] === "X" && activePlayer === getPlayers[0]) {
 
                     // Checks if position of "X" is not recorded in trackPlayerScore array
@@ -147,13 +147,34 @@ function StartGame() {
 
                 } else if(getBoard[i][j] === "O" && activePlayer === getPlayers[1]) {
                     
-                    // Checks if position of "X" is not recorded in trackPlayerScore array
+                    // Checks if position of "O" is not recorded in trackPlayerScore array
                     if(!activePlayer.trackPlayerScore.includes(`${i}${j}`)) {
                         activePlayer.trackPlayerScore.push(`${i}${j}`); 
-                    }    
+                    }
+
                 }
             }
         }
+    }
+
+
+    // Reset game
+    const gameReset = function() {
+
+        // Resets board
+        console.log(getBoard);
+        getBoard = GameBoard().printBoard();
+
+        // Reset score tracker
+        getPlayers.forEach((player) => {
+            player.trackPlayerScore = [];
+        })
+
+        return {
+            getBoard,
+            getPlayers
+        };
+
     }
 
 
@@ -180,22 +201,23 @@ function StartGame() {
 
         // Check for winner
         if(checkForWinner() === true) {
-            console.log(`${currentPlayer.player} is the winner!`);
 
-            // insert reset method
+            console.log(`${currentPlayer.player} is the winner!`);
+            gameReset();
 
         } else {
+
             switchPlayer();
+            console.log(getBoard);
+
         }
 
-        console.log(getBoard);
     }
-    
 
+    
     return {
         getActivePlayer,
         playRound,
-        getBoard
     };
 }
 
