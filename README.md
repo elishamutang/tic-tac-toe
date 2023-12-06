@@ -9,8 +9,8 @@ This branch was created to test out an alternative way of approaching this proje
 Objectives:
 
 1. Create working game in console (technically almost done)
-2. Set up reset method to reset round when a winner is found.
-3. Create function to render the game on the webpage
+2. Set up reset method to reset round when a winner is found. (done)
+3. Create function to render the game on the webpage (next)
 
 To keep in mind:
 
