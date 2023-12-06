@@ -104,19 +104,15 @@ function StartGame() {
         } else if(playerScore.includes("20") && playerScore.includes("21") && playerScore.includes("22")) {
             return true;
 
-        }
-
-        // Diagonal win
-        if(playerScore.includes("00") && playerScore.includes("11") && playerScore.includes("22")) {
+            //Diagonal Win
+        } else if(playerScore.includes("00") && playerScore.includes("11") && playerScore.includes("22")) {
             return true;
 
         } else if(playerScore.includes("02") && playerScore.includes("11") && playerScore.includes("20")) {
             return true;
 
-        }
-
-        // Vertical win
-        if(playerScore.includes("00") && playerScore.includes("10") && playerScore.includes("20")) {
+            //Vertical win
+        } else if(playerScore.includes("00") && playerScore.includes("10") && playerScore.includes("20")) {
             return true;
 
         } else if(playerScore.includes("01") && playerScore.includes("11") && playerScore.includes("21")) {
