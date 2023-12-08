@@ -38,8 +38,6 @@ function Players() {
 // Gameflow of Tic Tac Toe
 function StartGame() {
 
-    DOMHandler();
-
     let getBoard = GameBoard().printBoard();
     const getPlayers = [Players(), Players()];
 
@@ -252,7 +250,7 @@ function DOMHandler() {
 
 }
 
-
+const startDOM = DOMHandler();
 
 
 
