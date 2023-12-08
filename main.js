@@ -211,7 +211,6 @@ function StartGame() {
         }
 
     }
-
     
     return {
         getActivePlayer,
@@ -220,4 +219,15 @@ function StartGame() {
     };
 }
 
-const game = StartGame();
+
+function DOMHandler() {
+
+    
+
+}
+
+
+
+
+
+// const game = StartGame();
