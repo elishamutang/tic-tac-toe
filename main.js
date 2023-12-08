@@ -81,10 +81,6 @@ function StartGame() {
 
         console.log(`${activePlayer.player}'s turn`);
 
-        return {
-            activePlayer
-        };
-
     }
 
 
@@ -92,7 +88,7 @@ function StartGame() {
     const checkForWinner = function() {
 
         const playerScore = activePlayer.trackPlayerScore;
-        console.log(`${playerScore}, ${activePlayer.player}`);
+        // console.log(`${playerScore}, ${activePlayer.player}`);
 
         // Horizontal Win
         if(playerScore.includes("00") && playerScore.includes("01") && playerScore.includes("02")) {
@@ -127,7 +123,7 @@ function StartGame() {
 
 
     // Keeps track of player input
-    const checkScore = function() {
+    const trackScore = function() {
 
         for(let i=0; i<getBoard.length; i++) {
             // Loop through each row
@@ -166,10 +162,8 @@ function StartGame() {
             player.trackPlayerScore = [];
         })
 
-        return {
-            getBoard,
-            getPlayers
-        };
+        // Reset active player to be first player
+        activePlayer = getPlayers[0];
 
     }
 
@@ -193,12 +187,17 @@ function StartGame() {
 
 
         // Track score
-        checkScore();
+        trackScore();
 
         // Check for winner
         if(checkForWinner() === true) {
 
             console.log(`${currentPlayer.player} is the winner!`);
+            gameReset();
+
+        } else if(checkForWinner() === false && getPlayers[0].trackPlayerScore.length === 5) {
+
+            console.log("It's a draw!");
             gameReset();
 
         } else {
