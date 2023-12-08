@@ -38,6 +38,8 @@ function Players() {
 // Gameflow of Tic Tac Toe
 function StartGame() {
 
+    DOMHandler();
+
     let getBoard = GameBoard().printBoard();
     const getPlayers = [Players(), Players()];
 
@@ -222,7 +224,31 @@ function StartGame() {
 
 function DOMHandler() {
 
-    
+    // Target body
+    const body = document.querySelector("body");
+
+    // Create main gameboard and append to body
+    const mainElem = document.createElement("div");
+    mainElem.setAttribute("class", "mainElem");
+    body.append(mainElem);
+
+    let displayBoard = GameBoard().printBoard();
+
+    // Display gameboard
+    for(let i = 0; i < displayBoard.length; i++) {
+
+        const gameRows = document.createElement("div");
+        gameRows.setAttribute("class", "rows");
+        mainElem.append(gameRows);
+
+        for(let j = 0; j < displayBoard[i].length; j++) {
+
+            const gameCols = document.createElement("div");
+            gameCols.setAttribute("class", "cols");
+            gameRows.append(gameCols);
+
+        }
+    }
 
 }
 
