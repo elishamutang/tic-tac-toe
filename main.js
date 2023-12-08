@@ -117,6 +117,9 @@ function StartGame() {
         } else if(playerScore.includes("02") && playerScore.includes("12") && playerScore.includes("22")) {
             return true;
 
+            // Draw
+        } else {
+            return false;
         }
 
     }
@@ -154,8 +157,8 @@ function StartGame() {
     const gameReset = function() {
 
         // Resets board
-        console.log(getBoard);
         getBoard = GameBoard().printBoard();
+        console.log(getBoard);
 
         // Reset score tracker
         getPlayers.forEach((player) => {
@@ -185,7 +188,7 @@ function StartGame() {
         // Marks gameboard with player value
         getBoard[playerRow][playerCol] = currentPlayer.value;
 
-
+        
         // Track score
         trackScore();
 
@@ -213,6 +216,7 @@ function StartGame() {
     return {
         getActivePlayer,
         playRound,
+        gameReset
     };
 }
 
