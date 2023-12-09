@@ -234,6 +234,14 @@ function DOMHandler() {
 
     let displayBoard = GameBoard().printBoard();
 
+    // Create restart button
+    const restartBtn = document.createElement("button");
+    restartBtn.setAttribute("class", "reset");
+    restartBtn.setAttribute("type", "button");
+    restartBtn.textContent = "Restart";
+    body.append(restartBtn);
+
+
     // Display gameboard
     for(let i = 0; i < displayBoard.length; i++) {
 
