@@ -187,6 +187,7 @@ function StartGame() {
 
         // Marks gameboard with player value
         getBoard[playerRow][playerCol] = currentPlayer.value;
+        startDOM.playerInput(playerRow, playerCol, currentPlayer);
 
         
         // Track score
@@ -197,6 +198,7 @@ function StartGame() {
 
             console.log(`${currentPlayer.player} is the winner!`);
             gameReset();
+            // startDOM.resetDOM();
 
         } else if(checkForWinner() === false && getPlayers[0].trackPlayerScore.length === 5) {
 
@@ -250,16 +252,56 @@ function DOMHandler() {
         }
     }
 
-    const playerInput = function() {
+    // Updates player selection in the DOM
+    const playerInput = function(playerRow, playerCol, currentPlayer) {
 
+        const getRows = document.querySelectorAll(".rows");
 
+        getRows.forEach((row) => {
+            
+            if(row.dataset.rowIdx === playerRow) {
+
+                const getCols = document.querySelectorAll(`div[data-row-idx="${playerRow}"] > .cols`);
+
+                getCols.forEach((col) => {
+
+                    if(col.dataset.colIdx === playerCol) {
+
+                        col.innerHTML = currentPlayer.value;
+
+                    }
+
+                })
+
+            }
+
+        })
+
+    }
+
+    // Resets gameboard in DOM
+    const resetDOM = function() {
+
+        const resetBoard = document.querySelectorAll(".cols");
+
+        resetBoard.forEach((col) => {
+
+            col.innerHTML = "";
+
+        })
 
     }
 
 
+    return {
+        playerInput,
+        resetDOM
+    };
+
 
 }
 
+// Initialize DOM
 const startDOM = DOMHandler();
 
 
