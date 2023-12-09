@@ -37,4 +37,10 @@ body {
     height: inherit;
     background-color: white;
     border: 2px solid black;
+    font-size: 150px;
+    color: grey;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
