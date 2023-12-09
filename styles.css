@@ -52,7 +52,7 @@ body {
     border: 1px solid white;
     border-radius: 10px;
     cursor: pointer;
-    background-color: rgb(141, 183, 242);
+    background-color: rgb(52, 120, 214);
     font-size: 40px;
     color: white;
 
@@ -60,7 +60,5 @@ body {
 }
 
 .reset:hover {
-
     transform: scale(1.1);
-
 }
