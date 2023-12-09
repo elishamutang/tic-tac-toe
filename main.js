@@ -238,9 +238,8 @@ function DOMHandler() {
     const restartBtn = document.createElement("button");
     restartBtn.setAttribute("class", "reset");
     restartBtn.setAttribute("type", "button");
-    restartBtn.style.display = "none";
     restartBtn.textContent = "Restart";
-    body.append(restartBtn);
+    
 
     // Display gameboard
     for(let i = 0; i < displayBoard.length; i++) {
@@ -290,7 +289,7 @@ function DOMHandler() {
     // Resets gameboard in DOM
     const resetDOM = function() {
 
-        restartBtn.style.display = "";
+        body.append(restartBtn);
 
         restartBtn.addEventListener("click", () => {
             const checkCols = document.querySelectorAll(".cols");
@@ -299,7 +298,7 @@ function DOMHandler() {
                 col.innerHTML = "";
             })
 
-            restartBtn.style.display = "none";
+            restartBtn.remove();
         })
 
     }
