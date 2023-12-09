@@ -237,16 +237,26 @@ function DOMHandler() {
 
         const gameRows = document.createElement("div");
         gameRows.setAttribute("class", "rows");
+        gameRows.dataset.rowIdx = `${i}`;
         mainElem.append(gameRows);
 
         for(let j = 0; j < displayBoard[i].length; j++) {
 
             const gameCols = document.createElement("div");
             gameCols.setAttribute("class", "cols");
+            gameCols.dataset.colIdx = `${j}`;
             gameRows.append(gameCols);
 
         }
     }
+
+    const playerInput = function() {
+
+
+
+    }
+
+
 
 }
 
