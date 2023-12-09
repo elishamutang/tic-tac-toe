@@ -198,7 +198,7 @@ function StartGame() {
 
             console.log(`${currentPlayer.player} is the winner!`);
             gameReset();
-            // startDOM.resetDOM();
+            startDOM.resetDOM();
 
         } else if(checkForWinner() === false && getPlayers[0].trackPlayerScore.length === 5) {
 
@@ -238,9 +238,9 @@ function DOMHandler() {
     const restartBtn = document.createElement("button");
     restartBtn.setAttribute("class", "reset");
     restartBtn.setAttribute("type", "button");
+    restartBtn.style.display = "none";
     restartBtn.textContent = "Restart";
     body.append(restartBtn);
-
 
     // Display gameboard
     for(let i = 0; i < displayBoard.length; i++) {
@@ -290,20 +290,25 @@ function DOMHandler() {
     // Resets gameboard in DOM
     const resetDOM = function() {
 
-        const resetBoard = document.querySelectorAll(".cols");
+        restartBtn.style.display = "";
 
-        resetBoard.forEach((col) => {
+        restartBtn.addEventListener("click", () => {
+            const checkCols = document.querySelectorAll(".cols");
 
-            col.innerHTML = "";
+            checkCols.forEach((col) => {
+                col.innerHTML = "";
+            })
 
+            restartBtn.style.display = "none";
         })
 
     }
 
 
+
     return {
         playerInput,
-        resetDOM
+        resetDOM,
     };
 
 
