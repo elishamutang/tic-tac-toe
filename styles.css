@@ -55,4 +55,12 @@ body {
     background-color: rgb(141, 183, 242);
     font-size: 40px;
     color: white;
+
+    transition: transform 0.2s;
+}
+
+.reset:hover {
+
+    transform: scale(1.1);
+
 }
