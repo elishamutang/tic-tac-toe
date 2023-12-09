@@ -12,6 +12,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 50px;
 
 }
 
@@ -27,7 +29,6 @@ body {
     width: inherit;
     height: 200px;
     background-color: white;
-    /* border: 2px solid black; */
 
     display: flex;
 }
@@ -43,4 +44,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.reset {
+    width: 200px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(141, 183, 242);
+    font-size: 40px;
+    color: white;
 }
