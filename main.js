@@ -88,7 +88,6 @@ function StartGame() {
     const checkForWinner = function() {
 
         const playerScore = activePlayer.trackPlayerScore;
-        // console.log(`${playerScore}, ${activePlayer.player}`);
 
         // Horizontal Win
         if(playerScore.includes("00") && playerScore.includes("01") && playerScore.includes("02")) {
@@ -174,20 +173,21 @@ function StartGame() {
     // Starts round
     const playRound = function() {
 
-        // Prompt user to enter row and col
-        let playerRow = prompt("Enter row number (0-2)");
-        let playerCol = prompt("Enter col number (0-2)");
-
         let currentPlayer = getActivePlayer().activePlayer;
 
+        // Prompt user to enter row and col
+        let playerRow = startDOM.playerInput(currentPlayer);
+        console.log(playerRow);
+        // let playerCol = prompt("Enter col number (0-2)");
+
         // Prevents user to overwrite previous user's input
-        if(getBoard[playerRow][playerCol] != 0) {
-            return
-        }
+        // if(getBoard[playerRow][playerCol] != 0) {
+        //     return
+        // }
 
         // Marks gameboard with player value
-        getBoard[playerRow][playerCol] = currentPlayer.value;
-        startDOM.playerInput(playerRow, playerCol, currentPlayer);
+        // getBoard[playerRow][playerCol] = currentPlayer.value;
+        // startDOM.playerInput(playerRow, playerCol, currentPlayer);
 
         
         // Track score
@@ -214,7 +214,7 @@ function StartGame() {
         }
 
     }
-    
+
     return {
         getActivePlayer,
         playRound,
@@ -271,47 +271,64 @@ function DOMHandler() {
     startBtn.addEventListener("click", () => {
 
         const start = StartGame();
-        start;
+        const play = start.playRound();
 
+        start;
         startBtn.remove();
-        
-        start.getPlayers.forEach((player) => {
-            console.log(player.player);
-        })
+        play;
 
         const displayPlayers = document.createElement("div");
         displayPlayers.setAttribute("class", "banner");
         displayPlayers.textContent = `${start.getPlayers[0].player} vs ${start.getPlayers[1].player}`;
         body.insertBefore(displayPlayers, mainElem);
 
-
     })
 
 
     // Updates player selection in the DOM
-    const playerInput = function(playerRow, playerCol, currentPlayer) {
+    const playerInput = function(currentPlayer) {
 
         const getRows = document.querySelectorAll(".rows");
 
         getRows.forEach((row) => {
-            
-            if(row.dataset.rowIdx === playerRow) {
+            row.addEventListener("click", (e) => {
+                console.log(`Row: ${e.currentTarget.dataset.rowIdx}, Col: ${e.target.dataset.colIdx}`);
 
-                const getCols = document.querySelectorAll(`div[data-row-idx="${playerRow}"] > .cols`);
+                e.target.textContent = currentPlayer.value;
 
-                getCols.forEach((col) => {
+                if(e.target.textContent != "") {
+                    return
+                }
 
-                    if(col.dataset.colIdx === playerCol) {
-
-                        col.innerHTML = currentPlayer.value;
-
-                    }
-
-                })
-
-            }
-
+                switchPlayer();
+            })
         })
+
+
+
+        // getRows.forEach((row) => {
+
+        //     row.addEventListener("click", (e) => {
+        //         console.log(e.target);
+        //     })
+            
+        //     if(row.dataset.rowIdx === playerRow) {
+
+        //         const getCols = document.querySelectorAll(`div[data-row-idx="${playerRow}"] > .cols`);
+
+        //         getCols.forEach((col) => {
+
+        //             if(col.dataset.colIdx === playerCol) {
+
+        //                 col.innerHTML = currentPlayer.value;
+
+        //             }
+
+        //         })
+
+        //     }
+
+        // })
 
     }
 
