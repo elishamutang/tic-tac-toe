@@ -24,7 +24,7 @@ function GameBoard () {
 // Players object (or module)
 function Players() {
 
-    const player = prompt("Please enter your name");
+    const player = (prompt("Please enter your name")).toUpperCase();
     const trackPlayerScore = [];
 
     return {
@@ -298,9 +298,11 @@ function DOMHandler() {
 
                 if(e.target.textContent != "") {
                     return
+                } else {
+                    switchPlayer();
+                    console.log(currentPlayer.player);
                 }
 
-                switchPlayer();
             })
         })
 
