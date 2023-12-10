@@ -298,9 +298,6 @@ function DOMHandler() {
 
                 if(e.target.textContent != "") {
                     return
-                } else {
-                    switchPlayer();
-                    console.log(currentPlayer.player);
                 }
 
             })
