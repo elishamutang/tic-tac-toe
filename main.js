@@ -204,6 +204,7 @@ function StartGame() {
 
             console.log("It's a draw!");
             gameReset();
+            startDOM.resetDOM();
 
         } else {
 
