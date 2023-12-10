@@ -218,7 +218,8 @@ function StartGame() {
     return {
         getActivePlayer,
         playRound,
-        gameReset
+        gameReset,
+        getPlayers
     };
 }
 
@@ -237,7 +238,7 @@ function DOMHandler() {
 
     // Create restart button
     const restartBtn = document.createElement("button");
-    restartBtn.setAttribute("class", "reset");
+    restartBtn.setAttribute("class", "button");
     restartBtn.setAttribute("type", "button");
     restartBtn.textContent = "Restart";
     
@@ -259,6 +260,33 @@ function DOMHandler() {
 
         }
     }
+
+    // Display start game button
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "Start"
+    startBtn.setAttribute("class", "button");
+    startBtn.setAttribute("type", "button");
+    body.insertBefore(startBtn, mainElem);
+
+    startBtn.addEventListener("click", () => {
+
+        const start = StartGame();
+        start;
+
+        startBtn.remove();
+        
+        start.getPlayers.forEach((player) => {
+            console.log(player.player);
+        })
+
+        const displayPlayers = document.createElement("div");
+        displayPlayers.setAttribute("class", "banner");
+        displayPlayers.textContent = `${start.getPlayers[0].player} vs ${start.getPlayers[1].player}`;
+        body.insertBefore(displayPlayers, mainElem);
+
+
+    })
+
 
     // Updates player selection in the DOM
     const playerInput = function(playerRow, playerCol, currentPlayer) {
