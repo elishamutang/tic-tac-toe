@@ -10,7 +10,7 @@ body {
     background-color: beige;
 
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     gap: 30px;
@@ -55,6 +55,7 @@ body {
     background-color: rgb(52, 120, 214);
     font-size: 32px;
     color: white;
+    margin-top: 50px;
 
     transition: transform 0.2s;
 }
@@ -66,4 +67,15 @@ body {
 .button:first-of-type {
     font-size: 35px;
     background-color: rgb(77, 150, 77);
+}
+
+/* Banner div */
+.banner {
+    color: white;
+    width: 100vw;
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 30px;
+    padding: 8px;
+    background-color: rgb(211, 89, 89);
 }
