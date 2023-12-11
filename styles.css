@@ -75,7 +75,7 @@ body {
     width: 100vw;
     text-align: center;
     font-size: 50px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     padding: 8px;
     background-color: rgb(211, 89, 89);
 }
