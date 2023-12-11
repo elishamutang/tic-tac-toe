@@ -25,6 +25,7 @@ function GameBoard () {
 function Players() {
 
     const player = (prompt("Please enter your name")).toUpperCase();
+
     const trackPlayerScore = [];
 
     return {
@@ -44,9 +45,6 @@ function StartGame() {
     for(let i=0; i < getPlayers.length; i++) {
         console.log(`Player ${i+1}: ${getPlayers[i].player}`);
     }
-
-    console.log(getBoard);
-
 
     // Initialize first player
     let activePlayer = getPlayers[0];
@@ -80,6 +78,10 @@ function StartGame() {
         }
 
         console.log(`${activePlayer.player}'s turn`);
+
+        return {
+            activePlayer
+        };
 
     }
 
@@ -171,23 +173,15 @@ function StartGame() {
 
 
     // Starts round
-    const playRound = function() {
-
-        let currentPlayer = getActivePlayer().activePlayer;
-
-        // Prompt user to enter row and col
-        let playerRow = startDOM.playerInput(currentPlayer);
-        console.log(playerRow);
-        // let playerCol = prompt("Enter col number (0-2)");
+    const playRound = function(playerRow, playerCol, currentPlayer) {
 
         // Prevents user to overwrite previous user's input
-        // if(getBoard[playerRow][playerCol] != 0) {
-        //     return
-        // }
+        if(getBoard[playerRow][playerCol] !== 0) {
+            return
+        }
 
         // Marks gameboard with player value
-        // getBoard[playerRow][playerCol] = currentPlayer.value;
-        // startDOM.playerInput(playerRow, playerCol, currentPlayer);
+        getBoard[playerRow][playerCol] = currentPlayer.value;
 
         
         // Track score
@@ -198,19 +192,16 @@ function StartGame() {
 
             console.log(`${currentPlayer.player} is the winner!`);
             gameReset();
-            startDOM.resetDOM();
+            return true;
 
         } else if(checkForWinner() === false && getPlayers[0].trackPlayerScore.length === 5) {
 
             console.log("It's a draw!");
             gameReset();
-            startDOM.resetDOM();
+            return true;
 
         } else {
-
-            switchPlayer();
             console.log(getBoard);
-
         }
 
     }
@@ -219,12 +210,14 @@ function StartGame() {
         getActivePlayer,
         playRound,
         gameReset,
-        getPlayers
+        switchPlayer,
+        getPlayers,
+        getBoard
     };
 }
 
 
-function DOMHandler() {
+const loadDOM = (function DOMHandler() {
 
     // Target body
     const body = document.querySelector("body");
@@ -268,15 +261,16 @@ function DOMHandler() {
     startBtn.setAttribute("type", "button");
     body.insertBefore(startBtn, mainElem);
 
+    // User click start to begin game
     startBtn.addEventListener("click", () => {
 
+        // Start game
         const start = StartGame();
-        const play = start.playRound();
+        playerInput(start);
 
-        start;
         startBtn.remove();
-        play;
 
+        // Display who the players are
         const displayPlayers = document.createElement("div");
         displayPlayers.setAttribute("class", "banner");
         displayPlayers.textContent = `${start.getPlayers[0].player} vs ${start.getPlayers[1].player}`;
@@ -286,55 +280,49 @@ function DOMHandler() {
 
 
     // Updates player selection in the DOM
-    const playerInput = function(currentPlayer) {
+    const playerInput = function(start) {
+
+        const inputPlayers = start.getPlayers;
+        let inputActive = start.getActivePlayer().activePlayer;
+        const inputBoard = start.getBoard;
 
         const getRows = document.querySelectorAll(".rows");
 
         getRows.forEach((row) => {
             row.addEventListener("click", (e) => {
-                console.log(`Row: ${e.currentTarget.dataset.rowIdx}, Col: ${e.target.dataset.colIdx}`);
 
-                e.target.textContent = currentPlayer.value;
-
-                if(e.target.textContent != "") {
+                if(e.target.textContent !== "") {
                     return
+                };
+
+                let inputRow = e.currentTarget.dataset.rowIdx;
+                let inputCol = e.target.dataset.colIdx;
+
+                // Marks up the board with player value
+                e.target.textContent = inputActive.value;
+
+                // Calls playRound and passes row and col info for current player
+                let isTheRoundDone = start.playRound(inputRow, inputCol, inputActive);
+
+                console.log(isTheRoundDone);
+                if(isTheRoundDone === true) {
+                    console.log("inside");
+                    resetDOM();
+                } else {
+                    inputActive = start.switchPlayer().activePlayer;
                 }
+
+                console.log(inputActive);
 
             })
         })
-
-
-
-        // getRows.forEach((row) => {
-
-        //     row.addEventListener("click", (e) => {
-        //         console.log(e.target);
-        //     })
-            
-        //     if(row.dataset.rowIdx === playerRow) {
-
-        //         const getCols = document.querySelectorAll(`div[data-row-idx="${playerRow}"] > .cols`);
-
-        //         getCols.forEach((col) => {
-
-        //             if(col.dataset.colIdx === playerCol) {
-
-        //                 col.innerHTML = currentPlayer.value;
-
-        //             }
-
-        //         })
-
-        //     }
-
-        // })
 
     }
 
     // Resets gameboard in DOM
     const resetDOM = function() {
 
-        body.append(restartBtn);
+        body.insertBefore(restartBtn, mainElem);
 
         restartBtn.addEventListener("click", () => {
             const checkCols = document.querySelectorAll(".cols");
@@ -343,6 +331,8 @@ function DOMHandler() {
                 col.innerHTML = "";
             })
 
+            document.querySelector(".banner").remove();
+            loadDOM;
             restartBtn.remove();
         })
 
@@ -352,14 +342,14 @@ function DOMHandler() {
 
     return {
         playerInput,
-        resetDOM,
+        resetDOM
     };
 
 
-}
+})();
 
 // Initialize DOM
-const startDOM = DOMHandler();
+// const startDOM = DOMHandler();
 
 
 
