@@ -305,19 +305,20 @@ const loadDOM = (function DOMHandler() {
                 // Calls playRound and passes row and col info for current player
                 isTheRoundDone = start.playRound(inputRow, inputCol, inputActive);
 
-
                 if(isTheRoundDone === true) {
 
                     console.log("inside");
                     resetDOM();
-
+                    return
+        
                 } else {
-
+        
                     inputActive = start.switchPlayer().activePlayer;
-
+        
                 }
 
             })
+
         })
 
     }
