@@ -216,7 +216,7 @@ function StartGame() {
     };
 }
 
-
+// Instantly load DOM
 const loadDOM = (function DOMHandler() {
 
     // Target body
@@ -341,7 +341,7 @@ const loadDOM = (function DOMHandler() {
         })
 
     }
-    
+
 
     return {
         playerInput,
