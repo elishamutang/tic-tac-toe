@@ -341,8 +341,7 @@ const loadDOM = (function DOMHandler() {
         })
 
     }
-
-
+    
 
     return {
         playerInput,
