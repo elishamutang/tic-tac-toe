@@ -282,19 +282,20 @@ const loadDOM = (function DOMHandler() {
     // Updates player selection in the DOM
     const playerInput = function(start) {
 
-        const inputPlayers = start.getPlayers;
         let inputActive = start.getActivePlayer().activePlayer;
-        const inputBoard = start.getBoard;
+        let isTheRoundDone = false;
 
         const getRows = document.querySelectorAll(".rows");
 
         getRows.forEach((row) => {
             row.addEventListener("click", (e) => {
-
+                
+                // Prevents user from over-writing previous user input
                 if(e.target.textContent !== "") {
                     return
                 };
 
+                // Captures row and col idx of player input
                 let inputRow = e.currentTarget.dataset.rowIdx;
                 let inputCol = e.target.dataset.colIdx;
 
@@ -302,17 +303,19 @@ const loadDOM = (function DOMHandler() {
                 e.target.textContent = inputActive.value;
 
                 // Calls playRound and passes row and col info for current player
-                let isTheRoundDone = start.playRound(inputRow, inputCol, inputActive);
+                isTheRoundDone = start.playRound(inputRow, inputCol, inputActive);
 
-                console.log(isTheRoundDone);
+
                 if(isTheRoundDone === true) {
+
                     console.log("inside");
                     resetDOM();
-                } else {
-                    inputActive = start.switchPlayer().activePlayer;
-                }
 
-                console.log(inputActive);
+                } else {
+
+                    inputActive = start.switchPlayer().activePlayer;
+
+                }
 
             })
         })
@@ -332,8 +335,8 @@ const loadDOM = (function DOMHandler() {
             })
 
             document.querySelector(".banner").remove();
-            loadDOM;
             restartBtn.remove();
+            return
         })
 
     }
@@ -347,10 +350,3 @@ const loadDOM = (function DOMHandler() {
 
 
 })();
-
-// Initialize DOM
-// const startDOM = DOMHandler();
-
-
-
-// const game = StartGame();
