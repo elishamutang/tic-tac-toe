@@ -54,6 +54,7 @@ body {
     font-size: 32px;
     color: white;
     align-self: center;
+    margin-top: 10px;
 
     grid-row: 2 / 3;
 
