@@ -309,7 +309,6 @@ const loadDOM = (function DOMHandler() {
 
                     console.log("inside");
                     resetDOM();
-                    return
         
                 } else {
         
@@ -337,7 +336,6 @@ const loadDOM = (function DOMHandler() {
 
             document.querySelector(".banner").remove();
             restartBtn.remove();
-            return
         })
 
     }
