@@ -13,4 +13,5 @@ Progress (as of 12/12):
 
 What's next:
 - Fix logic between DOM and gameflow. Current problem is, after a round ends, players are still able to click on gameboard and this results in null values for player names.
+- Maybe change player name prompt to form/dialog.
 
