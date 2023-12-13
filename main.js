@@ -330,7 +330,7 @@ const loadDOM = (function DOMHandler() {
     const resetDOM = function(inputEvent, boardRows) {
 
         body.insertBefore(restartBtn, mainElem);
-        const removeBanner = document.querySelector("banner");
+        const removeBanner = document.querySelector(".banner");
 
         restartBtn.addEventListener("click", () => {
             const checkCols = document.querySelectorAll(".cols");
