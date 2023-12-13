@@ -12,6 +12,7 @@ Progress (as of 12/12):
 - Users able to insert names and click on gameboard.
 
 What's next:
-- Fix logic between DOM and gameflow. Current problem is, after a round ends, players are still able to click on gameboard and this results in null values for player names.
+- Fix logic between DOM and gameflow. Current problem is, after a round ends, players are still able to click on gameboard and this results in null values for player names (fixed)
 - Maybe change player name prompt to form/dialog.
+- Figure out why removeBanner in resetDOM is not removed and stores previous banner divs.
 
