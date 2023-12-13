@@ -287,45 +287,50 @@ const loadDOM = (function DOMHandler() {
 
         const getRows = document.querySelectorAll(".rows");
 
+        // Click event listener for users to interact with gameboard
+        function boardInput(event) {
+
+            // Prevents user from over-writing previous user input
+            if(event.target.textContent !== "") {
+                return
+            };
+
+            // Captures row and col idx of player input
+            let inputRow = event.currentTarget.dataset.rowIdx;
+            let inputCol = event.target.dataset.colIdx;
+
+            // Marks up the board with player value
+            event.target.textContent = inputActive.value;
+
+            // Calls playRound and passes row and col info for current player
+            isTheRoundDone = start.playRound(inputRow, inputCol, inputActive);
+
+            // Checks if round is finished
+            if(isTheRoundDone === true) {
+
+                console.log("Round Done");
+                resetDOM(boardInput, getRows);
+    
+            } else {
+    
+                inputActive = start.switchPlayer().activePlayer;
+    
+            }
+
+        }
+
+        // Allow users to interact with gameboard
         getRows.forEach((row) => {
-            row.addEventListener("click", (e) => {
-                
-                // Prevents user from over-writing previous user input
-                if(e.target.textContent !== "") {
-                    return
-                };
-
-                // Captures row and col idx of player input
-                let inputRow = e.currentTarget.dataset.rowIdx;
-                let inputCol = e.target.dataset.colIdx;
-
-                // Marks up the board with player value
-                e.target.textContent = inputActive.value;
-
-                // Calls playRound and passes row and col info for current player
-                isTheRoundDone = start.playRound(inputRow, inputCol, inputActive);
-
-                if(isTheRoundDone === true) {
-
-                    console.log("inside");
-                    resetDOM();
-        
-                } else {
-        
-                    inputActive = start.switchPlayer().activePlayer;
-        
-                }
-
-            })
-
+            row.addEventListener("click", boardInput);
         })
 
     }
 
     // Resets gameboard in DOM
-    const resetDOM = function() {
+    const resetDOM = function(inputEvent, boardRows) {
 
         body.insertBefore(restartBtn, mainElem);
+        const removeBanner = document.querySelector("banner");
 
         restartBtn.addEventListener("click", () => {
             const checkCols = document.querySelectorAll(".cols");
@@ -334,10 +339,20 @@ const loadDOM = (function DOMHandler() {
                 col.innerHTML = "";
             })
 
-            document.querySelector(".banner").remove();
-            restartBtn.remove();
-        })
+            console.log(removeBanner);
 
+            removeBanner.remove();
+            
+
+            restartBtn.remove();
+            body.insertBefore(startBtn, mainElem);
+            
+        })
+        
+        // Remove event listener from gameboard
+        boardRows.forEach((row) => {
+            row.removeEventListener("click", inputEvent);
+        })
     }
 
 
