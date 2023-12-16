@@ -198,7 +198,7 @@ function StartGame() {
 
             console.log("It's a draw!");
             gameReset();
-            return true;
+            return "draw";
 
         } else {
             console.log(getBoard);
@@ -314,6 +314,13 @@ const loadDOM = (function DOMHandler() {
                 document.querySelector(".banner").textContent = `${inputActive.player} is the winner!`;
                 resetDOM(boardInput, getRows);
     
+            } else if(isTheRoundDone === "draw") {
+
+                console.log("Draw!");
+
+                document.querySelector(".banner").textContent = "It's a draw!";
+                resetDOM(boardInput, getRows);
+
             } else {
     
                 inputActive = start.switchPlayer().activePlayer;
