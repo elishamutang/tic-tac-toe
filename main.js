@@ -309,6 +309,9 @@ const loadDOM = (function DOMHandler() {
             if(isTheRoundDone === true) {
 
                 console.log("Round Done");
+
+                // Display winner
+                document.querySelector(".banner").textContent = `${inputActive.player} is the winner!`;
                 resetDOM(boardInput, getRows);
     
             } else {
