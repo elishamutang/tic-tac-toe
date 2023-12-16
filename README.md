@@ -17,5 +17,7 @@ What's next:
 
 - Figure out why removeBanner in resetDOM is not removed and stores previous banner divs (*Fixed. Problem was due to event listener code on the restart button. Everytime the resetDOM method is called, the event listener is added but never removed, hence if more than 1 round is played, more than 1 event listener is added onto the beginner and logging multiple banner divs.*)
 
+- Display winner in banner.
+
 - Maybe change player name prompt to form/dialog.
 
