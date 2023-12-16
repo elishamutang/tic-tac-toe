@@ -6,7 +6,7 @@ This branch was created to test out a DOM handler function to handle the display
 It will:
 - Render the contents of the gameboard array to the webpage
 
-Progress (as of 12/12):
+Progress (as of 16/12):
 - Code allows DOM to be updated based on user input from the console.
 - Introduced a restart button to restart game when a round finishes.
 - Users able to insert names and click on gameboard.
