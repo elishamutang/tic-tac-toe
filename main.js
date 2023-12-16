@@ -348,9 +348,11 @@ const loadDOM = (function DOMHandler() {
             // Remove banner element from DOM
             removeBanner.remove();
 
-            // Remove restart button and insert start button
+            // Remove restart button and associated event listener
             restartBtn.removeEventListener("click", resetTheDOM);
             restartBtn.remove();
+
+            // Insert start button
             body.insertBefore(startBtn, mainElem);
         }
 
