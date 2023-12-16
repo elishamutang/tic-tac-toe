@@ -329,10 +329,14 @@ const loadDOM = (function DOMHandler() {
     // Resets gameboard in DOM
     const resetDOM = function(inputEvent, boardRows) {
 
+        // Present restart button on page
         body.insertBefore(restartBtn, mainElem);
+
+        // Target banner element
         const removeBanner = document.querySelector(".banner");
 
-        restartBtn.addEventListener("click", () => {
+        // External function to be added to restart button.
+        function resetTheDOM() {
             const checkCols = document.querySelectorAll(".cols");
 
             checkCols.forEach((col) => {
@@ -341,18 +345,23 @@ const loadDOM = (function DOMHandler() {
 
             console.log(removeBanner);
 
+            // Remove banner element from DOM
             removeBanner.remove();
-            
 
+            // Remove restart button and insert start button
+            restartBtn.removeEventListener("click", resetTheDOM);
             restartBtn.remove();
             body.insertBefore(startBtn, mainElem);
-            
-        })
+        }
+
+        // Add event listener to restart button.
+        restartBtn.addEventListener("click", resetTheDOM);
         
         // Remove event listener from gameboard
         boardRows.forEach((row) => {
             row.removeEventListener("click", inputEvent);
         })
+
     }
 
 
