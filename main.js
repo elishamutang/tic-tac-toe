@@ -216,7 +216,7 @@ function StartGame() {
     };
 }
 
-// Instantly load DOM
+// Instantly load DOM (IIFE)
 const loadDOM = (function DOMHandler() {
 
     // Target body
